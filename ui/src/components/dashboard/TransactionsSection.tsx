@@ -99,7 +99,7 @@ export default function TransactionsSection({
         />
         <button
           type="submit"
-          className="md:col-span-2 rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white"
+          className="md:col-span-2 cursor-pointer rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white"
         >
           Adicionar movimentação
         </button>
@@ -134,7 +134,7 @@ export default function TransactionsSection({
                         onDeleteTransaction(transaction.id);
                       }
                     }}
-                    className="rounded-md border border-red-200 px-3 py-1 text-xs font-semibold text-red-600 transition hover:bg-red-50"
+                    className="cursor-pointer rounded-md border border-red-200 px-3 py-1 text-xs font-semibold text-red-600 transition hover:bg-red-50"
                   >
                     Excluir
                   </button>

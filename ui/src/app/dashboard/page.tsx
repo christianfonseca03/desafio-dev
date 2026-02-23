@@ -1,6 +1,6 @@
 "use client";
 
-import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignOutButton } from "@clerk/nextjs";
 import Link from "next/link";
 import BalanceSummary from "@/components/dashboard/BalanceSummary";
 import CategorySection from "@/components/dashboard/CategorySection";
@@ -44,12 +44,24 @@ import useDashboardData from "@/hooks/useDashboardData";
          </SignedOut>
 
         <SignedIn>
-          <div className="flex flex-col gap-2">
-             <h1 className="text-3xl font-semibold text-gray-900">Dashboard</h1>
-             <p className="text-gray-600">
-               Gerencie suas categorias e movimentações financeiras.
-             </p>
-           </div>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-2">
+              <h1 className="text-3xl font-semibold text-gray-900">
+                Dashboard
+              </h1>
+              <p className="text-gray-600">
+                Gerencie suas categorias e movimentações financeiras.
+              </p>
+            </div>
+            <SignOutButton>
+              <button
+                type="button"
+                className="cursor-pointer rounded-md border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 transition hover:border-gray-400 hover:bg-gray-100 hover:text-gray-900"
+              >
+                Sair
+              </button>
+            </SignOutButton>
+          </div>
 
           <BalanceSummary totalBalance={totalBalance} />
 
