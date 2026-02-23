@@ -1,7 +1,7 @@
 ## UI - Movimentações Financeiras
 
 ### Stack
-- Next.js 15
+- Next.js 16
 - React 19
 - Tailwind CSS
 - Clerk (autenticação)
@@ -30,3 +30,11 @@ http://localhost:3000
 ```
 
 Observação: a API deve estar rodando para o dashboard funcionar.
+
+### Deploy (Vercel)
+- Root Directory: `ui`
+- Environment Variables:
+  - NEXT_PUBLIC_API_URL=https://sua-api.onrender.com
+  - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=...
+  - CLERK_SECRET_KEY=...
+- Build Command / Output Directory: deixe sem override
