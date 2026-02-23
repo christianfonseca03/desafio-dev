@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import type { TransactionsSectionProps } from "@/types/dashboard";
 
 export default function TransactionsSection({
@@ -20,19 +20,16 @@ export default function TransactionsSection({
   );
   const [transactionDescription, setTransactionDescription] = useState("");
 
-  useEffect(() => {
-    const hasCategory = categories.some(
-      (category) => category.id === transactionCategoryId,
-    );
-    if (!transactionCategoryId || !hasCategory) {
-      setTransactionCategoryId(categories[0]?.id ?? "");
-    }
-  }, [categories, transactionCategoryId]);
+  const resolvedTransactionCategoryId = categories.some(
+    (category) => category.id === transactionCategoryId,
+  )
+    ? transactionCategoryId
+    : categories[0]?.id ?? "";
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const success = await onCreateTransaction({
-      categoryId: transactionCategoryId,
+      categoryId: resolvedTransactionCategoryId,
       type: transactionType,
       amount: Number(transactionAmount),
       date: transactionDate,
@@ -52,7 +49,7 @@ export default function TransactionsSection({
         onSubmit={handleSubmit}
       >
         <select
-          value={transactionCategoryId}
+          value={resolvedTransactionCategoryId}
           onChange={(event) => setTransactionCategoryId(event.target.value)}
           className="rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-900"
         >

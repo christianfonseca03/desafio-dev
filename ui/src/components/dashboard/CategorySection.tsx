@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import type { CategorySectionProps } from "@/types/dashboard";
 
 export default function CategorySection({
@@ -13,14 +13,11 @@ export default function CategorySection({
     null,
   );
 
-  useEffect(() => {
-    if (
-      selectedCategoryId &&
-      !categories.some((category) => category.id === selectedCategoryId)
-    ) {
-      setSelectedCategoryId(null);
-    }
-  }, [categories, selectedCategoryId]);
+  const activeSelectedCategoryId = categories.some(
+    (category) => category.id === selectedCategoryId,
+  )
+    ? selectedCategoryId
+    : null;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -52,7 +49,7 @@ export default function CategorySection({
           <p>Carregando...</p>
         ) : categories.length ? (
           categories.map((category) => {
-            const isSelected = selectedCategoryId === category.id;
+            const isSelected = activeSelectedCategoryId === category.id;
             const balance = balanceByCategory.get(category.id) ?? 0;
             return (
               <div key={category.id} className="flex flex-col gap-2">
