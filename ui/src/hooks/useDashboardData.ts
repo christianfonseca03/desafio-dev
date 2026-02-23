@@ -7,7 +7,9 @@ import type {
   TransactionWithSign,
 } from "@/types/dashboard";
 
-const apiBase = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
+const apiBase =
+  process.env.NEXT_PUBLIC_API_URL ??
+  (process.env.NODE_ENV === "production" ? "" : "http://localhost:3001");
 
 export default function useDashboardData() {
   const { getToken } = useAuth();
@@ -47,6 +49,9 @@ export default function useDashboardData() {
 
   const apiFetch = useCallback(
     async (path: string, init?: RequestInit) => {
+      if (!apiBase) {
+        throw new Error("NEXT_PUBLIC_API_URL não configurada.");
+      }
       const token = await getToken();
       if (!token) {
         throw new Error("Não autenticado");
